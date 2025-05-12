@@ -4,7 +4,10 @@ var app=express();
 var routes=require('./routes/route.js');
 
 app.set('view engine','ejs');
-
+app.use(function(req, res, next) {
+    res.set('Cache-Control', 'public, max-age=31536000');
+    next();
+});
 app.use(express.static(__dirname + '/public'));
 
 app.get('/',routes.home);
